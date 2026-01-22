@@ -989,6 +989,57 @@
 </head>
 <body>
 
+<!-- Password Protection Overlay -->
+<div id="password-overlay" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter Tight', sans-serif;
+">
+    <img src="https://cdn.prod.website-files.com/5905e49a2540264c16564421/658a2211dd7c62ee2c7beab0_Untitled%20design.svg" alt="Logo" style="height: 50px; margin-bottom: 40px;">
+    <h2 style="color: white; font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 10px;">Strategic Partnership Proposal</h2>
+    <p style="color: rgba(255,255,255,0.6); margin-bottom: 40px;">Enter password to view this presentation</p>
+    <input type="password" id="password-input" placeholder="Enter password" style="
+        padding: 15px 25px;
+        font-size: 16px;
+        border: 2px solid rgba(255,255,255,0.2);
+        border-radius: 10px;
+        background: rgba(255,255,255,0.1);
+        color: white;
+        width: 300px;
+        text-align: center;
+        outline: none;
+        transition: border-color 0.3s;
+    " onfocus="this.style.borderColor='#5832d1'" onblur="this.style.borderColor='rgba(255,255,255,0.2)'">
+    <p id="error-msg" style="color: #ef4444; margin-top: 15px; font-size: 14px; opacity: 0;">Incorrect password</p>
+</div>
+
+<script>
+    document.getElementById('password-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            if (this.value === 'yigal') {
+                document.getElementById('password-overlay').style.opacity = '0';
+                document.getElementById('password-overlay').style.transition = 'opacity 0.5s';
+                setTimeout(() => {
+                    document.getElementById('password-overlay').style.display = 'none';
+                }, 500);
+            } else {
+                document.getElementById('error-msg').style.opacity = '1';
+                this.style.borderColor = '#ef4444';
+                this.value = '';
+            }
+        }
+    });
+</script>
+
 <!-- Navigation -->
 <nav class="nav">
     <img src="https://cdn.prod.website-files.com/5905e49a2540264c16564421/658a2211dd7c62ee2c7beab0_Untitled%20design.svg" alt="Adventure Logo" class="nav-logo">
